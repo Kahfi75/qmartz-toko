@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriController;
+
+
+Route::resource('kategori', KategoriController::class);
 
 // Route untuk halaman login
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -27,3 +31,4 @@ Route::get('/kasir', function () {
 
 
 Route::resource('produk', ProdukController::class);
+Route::resource('kategori', KategoriController::class);

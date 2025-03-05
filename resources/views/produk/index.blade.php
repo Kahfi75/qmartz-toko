@@ -4,62 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List - Qmartz</title>
+    <title>Daftar Produk - Qmartz</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <nav class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 250px; height: 100vh;">
-            <a href="#" class="d-flex align-items-center mb-3 text-white text-decoration-none">
-                <span class="fs-5 fw-bold">Qmartz POS</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white active">Dashboard</a>
-                </li>
-                <li><a href="{{ route('kasir')}}" class="nav-link text-white">Kasir</a></li>
-                <li class="nav-item">
-                    <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse"
-                        data-bs-target="#produkDropdown">Produk</a>
-                    <ul class="collapse list-unstyled ps-3" id="produkDropdown">
-                        <li><a class="nav-link text-white" href="{{ route('produk.index') }}">Daftar Produk</a></li>
-                        <li><a class="nav-link text-white" href="{{ route('produk.create') }}">Tambah Produk</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="nav-link text-white">Transaksi</a></li>
-                <li><a href="#" class="nav-link text-white">Laporan</a></li>
-                <li><a href="#" class="nav-link text-white">Pengaturan</a></li>
-            </ul>
-            <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                        class="rounded-circle me-2">
-                    <strong>Admin</strong>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item w-100 text-start">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
 
-        <!-- Main Content -->
-        <div class="container-fluid mt-4">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="text-center mb-3">
+            <i class="fas fa-store fs-4"></i>
+            <span class="fs-5 fw-bold">Qmartz POS</span>
+        </div>
+        <hr>
+        <ul class="nav flex-column">
+            <li><a href="#" class="nav-link active"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a></li>
+            <li><a href="{{ route('kasir') }}" class="nav-link"><i class="fas fa-cash-register me-2"></i> Kasir</a></li>
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#produkDropdown">
+                    <i class="fas fa-box me-2"></i> Produk
+                </a>
+                <ul class="collapse list-unstyled ps-3" id="produkDropdown">
+                    <li><a href="{{ route('produk.index') }}" class="nav-link">Daftar Produk</a></li>
+                    <li><a href="{{ route('produk.create') }}" class="nav-link">Tambah Produk</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="nav-link"><i class="fas fa-exchange-alt me-2"></i> Transaksi</a></li>
+            <li><a href="#" class="nav-link"><i class="fas fa-chart-line me-2"></i> Laporan</a></li>
+            <li><a href="#" class="nav-link"><i class="fas fa-cog me-2"></i> Pengaturan</a></li>
+        </ul>
+        <hr>
+        <div class="text-center">
+            <a href="#" class="text-white text-decoration-none d-flex align-items-center justify-content-center">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>Admin</strong>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Konten -->
+    <main class="content">
+        <div class="container mt-4">
             <h4 class="mb-3">Daftar Produk</h4>
             <p class="mb-4">Kelola produk toko Anda dengan efisien menggunakan Qmartz POS.</p>
 
@@ -67,7 +79,7 @@
                 <div>
                     <a href="#" class="btn btn-success">Import</a>
                     <a href="#" class="btn btn-warning">Export</a>
-                    <a href="{{ route('produk.create') }}" class="btn btn-primary">Tambah Produk</a>
+                    <a href="#" class="btn btn-primary">Tambah Produk</a>
                 </div>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Cari produk" aria-label="Search">
@@ -106,12 +118,11 @@
                                 </button>
                             </td>
                         </tr>
-                        <!-- Tambahkan data lainnya di sini -->
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
