@@ -11,8 +11,8 @@ class KategoriController extends Controller
     // Menampilkan daftar kategori
     public function index()
     {
-        $kategori = Kategori::orderBy('id', 'desc')->paginate(10);
-        return view('produk.kategori', compact('kategori'));
+        $kategori = Kategori::orderBy('id_kategori', 'desc')->paginate(10);
+        return view('kategori.index', compact('kategori')); // Perbaikan path view
     }
 
     // Menampilkan form tambah kategori
@@ -25,12 +25,12 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255|unique:kategoris,nama_kategori'
+            'nama_kategori' => 'required|string|max:255|unique:kategori,nama_kategori'
         ]);
 
         Kategori::create($request->only(['nama_kategori']));
 
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!'); // Perbaikan route
     }
 
     // Menampilkan form edit kategori
@@ -45,19 +45,19 @@ class KategoriController extends Controller
         $request->validate([
             'nama_kategori' => [
                 'required', 'string', 'max:255',
-                Rule::unique('kategoris', 'nama_kategori')->ignore($kategori->id)
+                Rule::unique('kategori', 'nama_kategori')->ignore($kategori->id)
             ]
         ]);
 
         $kategori->update($request->only(['nama_kategori']));
 
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diperbarui!');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui!'); // Perbaikan route
     }
 
     // Hapus kategori
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus!');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus!'); // Perbaikan route
     }
 }

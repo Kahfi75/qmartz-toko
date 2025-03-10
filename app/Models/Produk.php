@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,9 +12,20 @@ class Produk extends Model
 
     protected $table = 'produk';
     protected $primaryKey = 'id_produk';
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
-        'nama_produk', 'merk', 'harga_beli', 'harga_jual', 'stok'
+        'nama_produk',
+        'id_kategori',
+        'harga_beli',
+        'harga_jual',
+        'stok',
+        'tanggal_kadaluarsa',
+        'product_image' // Hapus jika tidak ada di database
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
+    }
 }

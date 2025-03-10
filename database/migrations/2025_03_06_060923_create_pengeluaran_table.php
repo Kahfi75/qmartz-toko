@@ -9,22 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        // Kategori Table
-        Schema::create('kategori', function (Blueprint $table) {
-            $table->id('id_kategori');
-            $table->string('nama_kategori')->unique();
+
+        // Pengeluaran Table
+        Schema::create('pengeluaran', function (Blueprint $table) {
+            $table->id('id_pengeluaran');
+            $table->text('deskripsi');
+            $table->integer('nominal');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategoris');
+        Schema::dropIfExists('pengeluaran');
     }
 };

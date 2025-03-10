@@ -84,7 +84,18 @@
                     <li><a href="{{ route('kategori.create') }}" class="nav-link">Tambah Kategori</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="nav-link"><i class="fas fa-exchange-alt"></i> Transaksi</a></li>
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#transaksiDropdown">
+                    <i class="fas fa-exchange-alt"></i> Transaksi
+                </a>
+                <ul class="collapse list-unstyled ps-3" id="transaksiDropdown">
+                    <li><a href="{{ route('transaksi.pembelian') }}" class="nav-link">Pembelian</a></li>
+                    <li><a href="{{ route('transaksi.penjualan') }}" class="nav-link">Penjualan</a></li>
+                </ul>
+            </li>
+
+
+
             <li><a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Laporan</a></li>
             <li><a href="#" class="nav-link"><i class="fas fa-cog"></i> Pengaturan</a></li>
         </ul>
@@ -97,7 +108,9 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
