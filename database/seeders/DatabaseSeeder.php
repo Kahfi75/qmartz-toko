@@ -13,5 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // Panggil UserSeeder untuk membuat akun Admin & Kasir
         $this->call(UserSeeder::class);
+        $this->call(KategoriSeeder::class);
+        $this->call(PemasokSeeder::class);
     }
 }

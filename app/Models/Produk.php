@@ -28,4 +28,6 @@ class Produk extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
+
+  
 }

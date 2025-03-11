@@ -57,16 +57,7 @@
                     <li><a href="{{ route('produk.create') }}" class="nav-link">Tambah Produk</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="transaksiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-exchange-alt"></i> Transaksi
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="transaksiDropdown">
-                    <li><a class="dropdown-item" href="{{ route('transaksi.pembelian') }}">Pembelian</a></li>
-                    <li><a class="dropdown-item" href="{{ route('transaksi.penjualan') }}">Penjualan</a></li>
-                </ul>
-            </li>
-
+            <li><a href="#" class="nav-link"><i class="fas fa-exchange-alt me-2"></i> Transaksi</a></li>
             <li><a href="#" class="nav-link"><i class="fas fa-chart-line me-2"></i> Laporan</a></li>
             <li><a href="#" class="nav-link"><i class="fas fa-cog me-2"></i> Pengaturan</a></li>
         </ul>
@@ -78,6 +69,10 @@
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKategori">
             <i class="fas fa-plus"></i> Tambah Kategori
+        </button>
+
+        <button type="button" class="btn btn-warning" id="btnIsiKategori">
+            <i class="fas fa-sync-alt"></i> Isi Kategori Otomatis
         </button>
 
         <!-- Modal Tambah Kategori -->
@@ -143,6 +138,22 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('btnIsiKategori').addEventListener('click', function() {
+            fetch("{{ route('kategori.autofill') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 
 </html>

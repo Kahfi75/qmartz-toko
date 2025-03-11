@@ -36,4 +36,6 @@ Route::middleware(['auth'])->group(function () {
     // Resource route untuk Produk & Kategori (sudah mencakup semua operasi CRUD)
     Route::resource('produk', ProdukController::class);
     Route::resource('kategori', KategoriController::class);
+    Route::post('/kategori/autofill', [KategoriController::class, 'autofill'])->name('kategori.autofill');
+    Route::resource('penjualan', PenjualanController::class);
 });
